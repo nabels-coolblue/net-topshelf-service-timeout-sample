@@ -4,12 +4,61 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Serilog;
+
+using Topshelf;
+
 namespace net_topshelf_service_timeout_sample
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
+            Log.Logger = new LoggerConfiguration()
+                .WriteTo.ColoredConsole()
+                .CreateLogger();
+
+            HostFactory.Run(x =>
+            {
+                x.Service<IService>(s =>
+                {
+                    s.ConstructUsing(name => ServiceFactory.GetService());
+                    s.WhenStarted(ms => ms.Start());
+                    s.WhenStopped(ms => ms.Stop());
+                });
+                x.RunAsLocalSystem();
+
+                x.SetDescription("description: net-topshelf-service-timeout-sample");
+                x.SetDisplayName("display name: net-topshelf-service-timeout-sample");
+                x.SetServiceName("service name: net-topshelf-service-timeout-sample");
+            });
+        }
+    }
+
+    public class WellBehavedService : IService
+    {
+        public void Start()
+        {
+            Log.Logger.Information($"{nameof(WellBehavedService)} has started.");
+        }
+
+        public void Stop()
+        {
+            Log.Logger.Information($"{nameof(WellBehavedService)} has stopped.");
+        }
+    }
+
+    public interface IService
+    {
+        void Start();
+        void Stop();
+    }
+    
+    public class ServiceFactory
+    {
+        public static IService GetService()
+        {
+            return new WellBehavedService();
         }
     }
 }
