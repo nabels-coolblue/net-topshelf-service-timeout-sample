@@ -28,11 +28,7 @@ namespace net_topshelf_service_timeout_sample
                     s.WhenStarted(ms => ms.Start());
                     s.WhenStopped(ms => ms.Stop());
                 });
-                x.RunAsLocalSystem();
-
-                x.SetDescription("description: net-topshelf-service-timeout-sample");
-                x.SetDisplayName("display name: net-topshelf-service-timeout-sample");
-                x.SetServiceName("service name: net-topshelf-service-timeout-sample");
+                x.SetServiceName("sample-BlockingService5");
             });
         }
     }

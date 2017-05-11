@@ -12,8 +12,8 @@ namespace net_topshelf_service_timeout_sample.Services
     {
         public static IService GetService()
         {
-            Log.Logger.Information($"Initializing {nameof(BlockingService)}...");
-            return new BlockingService();
+            Log.Logger.Information($"Initializing {nameof(WellBehavedService)}...");
+            return new WellBehavedService();
         }
     }
 }

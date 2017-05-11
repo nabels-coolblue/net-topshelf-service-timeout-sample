@@ -13,7 +13,11 @@ namespace net_topshelf_service_timeout_sample.Services
     {
         public void Start()
         {
-            Thread.Sleep(60000);
+            Log.Logger.Information($"{GetType().Name}: {nameof(Start)}.");
+            Log.Logger.Information("Simulating expensive bootstrapping of application (60 seconds).");
+
+            Thread.Sleep(5000);
+
             Log.Logger.Information($"{nameof(BlockingService)} has started.");
         }
 
