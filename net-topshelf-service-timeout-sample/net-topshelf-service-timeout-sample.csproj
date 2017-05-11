@@ -55,8 +55,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Services\BlockingService.cs" />
+    <Compile Include="Services\IService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ServiceFactory.cs" />
+    <Compile Include="Services\WellBehavedService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
